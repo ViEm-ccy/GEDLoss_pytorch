@@ -208,7 +208,7 @@ def torch_calc_spectrograms(waves, window_lengths, spectral_diffs=(0, 1),
                 ffts = [torch_matmul_real_with_complex(f, mat) for f in frames]
 
             #sq_mag = lambda x: tf.square(tf.math.real(x)) + tf.square(tf.math.imag(x))
-            sq_mag = lambda x: (torch.view_as_real(x)[:,0]) + (torch.view_as_real(x)[:,1]**2)**2
+            sq_mag = lambda x: (torch.view_as_real(x)[:,0])**2 + (torch.view_as_real(x)[:,1])**2
             # torch.view_as_real() opreation need the last release edition of Pytorch 1.6.0
             specs_sq = [sq_mag(f) for f in ffts]
 
